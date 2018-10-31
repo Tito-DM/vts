@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "562989775164-t86fffn87oo7q01ik4d6d25q2rroludr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pyong.vehicle_tracking_system",
+            "certificate_hash": "e000f1630646a7f4e2ee62e9ad69b7f2c5c23756"
+          }
+        },
+        {
           "client_id": "562989775164-99bc6vuvlmp3i4ah7el36t8lnh12i6fp.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "562989775164-99bc6vuvlmp3i4ah7el36t8lnh12i6fp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
