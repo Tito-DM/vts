@@ -25,12 +25,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.concurrent.TimeUnit;
 
 
+
 public class Registration extends AppCompatActivity {
     EditText phoneEditText, codeEditText;
     Button verifyButton;
     DatabaseReference myDataBaseRef;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
-    private FirebaseAuth mAuth;
+    public static FirebaseAuth mAuth;
     private String mVerificationId;
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private int btntype =0;
@@ -38,12 +39,7 @@ public class Registration extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-            mAuth = FirebaseAuth.getInstance();
-        if (mAuth.getCurrentUser() != null){
-            Intent intent = new Intent(Registration.this, Vehicle_registration.class);
-            startActivity(intent);
-            finish();
-        }
+
 
 
 
