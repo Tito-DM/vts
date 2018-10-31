@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,32 +27,16 @@ public class Vehicle_registration extends AppCompatActivity {
     EditText editTextName, editTextPhone, editTextManufacturer,
             editTextPlateNumber, editTextColour, editTextModel;
     Button saveDataBtn;
-    String getUserValue;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_registration);
 
-        //check vehicle information
-        DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("name");
-
-        mref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                getUserValue = dataSnapshot.getValue(String.class);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
         mAuth = FirebaseAuth.getInstance();
-        if (mAuth.getCurrentUser() != null && getUserValue.isEmpty()){
-            Intent intent = new Intent(Vehicle_registration.this, Userprofile.class);
+        if (mAuth.getCurrentUser() != null){
+            Intent intent = new Intent(Vehicle_registration.this, userprofile.class);
             startActivity(intent);
             finish();
         }
@@ -94,6 +80,10 @@ public class Vehicle_registration extends AppCompatActivity {
 
                     //save to the database
                     current_user_db.setValue(newPost);
+                    Toast.makeText(Vehicle_registration.this, "Data Saved", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Vehicle_registration.this, userprofile.class);
+                    startActivity(intent);
+                    finish();
                 }
 
             }
