@@ -17,7 +17,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="0"
         android:orientation="horizontal">
         <TextView
@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:text="Name:"/>
         <TextView
+            android:id="@+id/textViewgetName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="My Mane"/>
@@ -34,14 +35,49 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="0"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name:"/>
+            android:text="Phone Number:"/>
         <TextView
+            android:id="@+id/textViewgetphone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Mane"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Model:"/>
+        <TextView
+            android:id="@+id/textViewgetmodel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Mane"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Colour:"/>
+        <TextView
+            android:id="@+id/textViewgetcolour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="My Mane"/>
@@ -51,13 +87,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name:"/>
+            android:text="Plate Number:"/>
         <TextView
+            android:id="@+id/textViewgetplate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="My Mane"/>
@@ -66,48 +104,28 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name:"/>
+            android:text="Manufacture:"/>
         <TextView
+            android:id="@+id/textViewgetmanufacture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="My Mane"/>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name:"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="My Mane"/>
+    <Button
+        android:id="@+id/buttom_connect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="connect to hardware"/>
 
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name:"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="My Mane"/>
-
-    </LinearLayout>
 
 
 

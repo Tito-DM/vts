@@ -33,6 +33,7 @@ public class Vehicle_registration extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_registration);
+        String name = "";
 
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null){
