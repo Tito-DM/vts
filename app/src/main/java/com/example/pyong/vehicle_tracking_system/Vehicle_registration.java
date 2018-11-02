@@ -22,11 +22,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.example.pyong.vehicle_tracking_system.Registration.mAuth;
+import static com.example.pyong.vehicle_tracking_system.SmsReceiver.latitude;
+import static com.example.pyong.vehicle_tracking_system.SmsReceiver.longitude;
+
 
 public class Vehicle_registration extends AppCompatActivity {
     EditText editTextName, editTextPhone, editTextManufacturer,
             editTextPlateNumber, editTextColour, editTextModel;
     Button saveDataBtn;
+
+
 
 
     @Override
@@ -78,6 +83,9 @@ public class Vehicle_registration extends AppCompatActivity {
                     newPost.put("plate_number", plate_number);
                     newPost.put("colour", colour);
                     newPost.put("model", model);
+                    newPost.put("latitude", latitude);
+                    newPost.put("longitude", longitude);
+
 
                     //save to the database
                     current_user_db.setValue(newPost);

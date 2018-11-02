@@ -41,7 +41,6 @@ public class userprofile extends AppCompatActivity
             textviewPlateNumber, textviewColour, textviewModel;
     Button connect_btn;
     ArrayList<String> userDataList = new ArrayList<>();
-
     private final static int REQUEST_CODE_PERMISSION_SEND_SMS =123;
 
 
@@ -198,7 +197,7 @@ public class userprofile extends AppCompatActivity
     }
 
     protected void sendSMSMessage() {
-        String phone = "+27611557995";
+        String phone = "+27659943377";
         String message = "Hello world";
 
         try {

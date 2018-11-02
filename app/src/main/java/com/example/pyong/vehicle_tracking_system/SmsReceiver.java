@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 public class SmsReceiver extends BroadcastReceiver {
     private String TAG = SmsReceiver.class.getSimpleName();
+    public static String hdwMessage = "";
+    public static String latitude = "", longitude ="";
 
     public SmsReceiver() {}
 
@@ -28,9 +30,9 @@ public class SmsReceiver extends BroadcastReceiver {
                 SmsMessage smsMessage = SmsMessage.createFromPdu((byte[]) sms[i]);
 
                 String phone = smsMessage.getOriginatingAddress();
-                String message = smsMessage.getMessageBody().toString();
+                hdwMessage = smsMessage.getMessageBody().toString();
 
-                Toast.makeText(context, phone + ": " + message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, phone + ": " + hdwMessage, Toast.LENGTH_SHORT).show();
             }
         }
     }
