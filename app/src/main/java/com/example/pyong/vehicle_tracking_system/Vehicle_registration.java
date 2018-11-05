@@ -76,23 +76,41 @@ public class Vehicle_registration extends AppCompatActivity {
                     String colour = editTextColour.getText().toString();
                     String model = editTextModel.getText().toString();
 
-                    //save info to a hash
-                    newPost.put("name", name);
-                    newPost.put("hdw_phone", phone);
-                    newPost.put("vehicle_manufacture", manufacture);
-                    newPost.put("plate_number", plate_number);
-                    newPost.put("colour", colour);
-                    newPost.put("model", model);
-                    newPost.put("latitude", latitude);
-                    newPost.put("longitude", longitude);
+                    //check each field
+                    if (name.isEmpty()){
+                        Toast.makeText(Vehicle_registration.this, "Name field cannot be empty", Toast.LENGTH_SHORT).show();
+
+                    }else if (phone.isEmpty()){
+                        Toast.makeText(Vehicle_registration.this, "Phone number field cannot be empty", Toast.LENGTH_SHORT).show();
+                    }else if (manufacture.isEmpty()){
+                        Toast.makeText(Vehicle_registration.this, "manufacture field cannot be empty", Toast.LENGTH_SHORT).show();
+                    }else if (plate_number.isEmpty()){
+                        Toast.makeText(Vehicle_registration.this, "plate mumber field cannot be empty", Toast.LENGTH_SHORT).show();
+                    }else if (colour.isEmpty()){
+                        Toast.makeText(Vehicle_registration.this, "color field cannot be empty", Toast.LENGTH_SHORT).show();
+                    }else if (model.isEmpty()){
+                        Toast.makeText(Vehicle_registration.this, "model field cannot be empty", Toast.LENGTH_SHORT).show();
+                    }else{
+                        //save info to a hash
+                        newPost.put("name", name);
+                        newPost.put("hdw_phone", phone);
+                        newPost.put("vehicle_manufacture", manufacture);
+                        newPost.put("plate_number", plate_number);
+                        newPost.put("colour", colour);
+                        newPost.put("model", model);
+                        newPost.put("latitude", latitude);
+                        newPost.put("longitude", longitude);
 
 
-                    //save to the database
-                    current_user_db.setValue(newPost);
-                    Toast.makeText(Vehicle_registration.this, "Data Saved", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Vehicle_registration.this, userprofile.class);
-                    startActivity(intent);
-                    finish();
+                        //save to the database
+                        current_user_db.setValue(newPost);
+                        Toast.makeText(Vehicle_registration.this, "Data Saved", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(Vehicle_registration.this, userprofile.class);
+                        startActivity(intent);
+                        finish();
+
+                    }
+
                 }
 
             }

@@ -4,17 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="@drawable/gradient"
     tools:context=".Vehicle_registration">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/textColor"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
+        android:letterSpacing="0.1"
+        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
-        android:text="Register Your Vehicle"
-        android:textSize="36dp" />
+        android:text="REGISTER YOUR VEHICLE"
+        android:textSize="22dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,8 +27,10 @@
 
         <EditText
             android:id="@+id/editText_name"
-            android:layout_width="350dp"
+            android:layout_width="310dp"
+            android:textColorHint="@color/hintTextColor"
             android:layout_gravity="center"
+            android:letterSpacing="0.2"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Enter your full name"
@@ -34,54 +38,66 @@
 
         <EditText
             android:id="@+id/editText_hdwPhone"
-            android:layout_width="350dp"
+            android:layout_width="310dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:letterSpacing="0.2"
+            android:textColorHint="@color/hintTextColor"
             android:ems="10"
             android:hint="Enter the hardware phone number"
             android:inputType="phone" />
 
         <EditText
             android:id="@+id/editText_vehicle_manufacturer"
-            android:layout_width="350dp"
+            android:layout_width="310dp"
+            android:letterSpacing="0.2"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/hintTextColor"
             android:ems="10"
             android:hint="Enter Car manufacture"
             android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/editText_plate_number"
-            android:layout_width="350dp"
+            android:layout_width="310dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:letterSpacing="0.2"
+            android:textColorHint="@color/hintTextColor"
             android:ems="10"
             android:hint="vehicle plate number"
             android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/editText_color"
-            android:layout_width="350dp"
+            android:layout_width="310dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/hintTextColor"
+            android:letterSpacing="0.2"
             android:ems="10"
             android:hint="vehicle colour"
             android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/editText_model"
-            android:layout_width="350dp"
+            android:layout_width="310dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/hintTextColor"
+            android:letterSpacing="0.2"
             android:hint="vehicle model"
-            android:layout_marginBottom="20px"
+            android:layout_marginBottom="50px"
             android:inputType="textPersonName" />
 
         <Button
             android:id="@+id/button_save"
-            android:layout_width="250dp"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
+            android:letterSpacing="0.2"
             android:layout_gravity="center"
+            android:background="@color/buttonColor"
             android:text="Register" />
 
 

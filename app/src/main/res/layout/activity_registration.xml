@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/gradient"
     android:layout_height="match_parent"
     tools:context=".Registration">
 
@@ -11,27 +12,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:textSize="30dp"
+        android:textColor="@color/textColor"
+        android:textSize="20dp"
+        android:letterSpacing="0.3"
         android:layout_marginTop="40dp"
-        android:text="Create an Account" />
+        android:text="CREATE AN ACCOUNT" />
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="322dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="139dp"
-        android:layout_marginEnd="49dp"
-        android:layout_marginRight="49dp"
+        android:layout_marginTop="113dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:text="\n 1-Enter Your Phone Number\n 2- A Verification Code Wil\n 3- click on verify " />
+            android:layout_marginLeft="40dp"
+            android:letterSpacing="0.2"
+            android:layout_marginBottom="50dp"
+            android:text="\n 1-Enter Your Phone Number\n 2- A Verification Code Wil\n 3- click on verify "
+            android:textColor="@color/textColor" />
 
 
         <EditText
@@ -40,10 +46,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
+            android:letterSpacing="0.2"
+            android:textColorHint="@color/hintTextColor"
             android:layout_weight="0"
             android:ems="10"
             android:hint="Enter Phone Number"
-            android:inputType="phone" />
+            android:inputType="phone"
+             />
 
         <EditText
             android:id="@+id/editText_code"
@@ -51,18 +60,25 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginRight="42dp"
+            android:textColorHint="@color/hintTextColor"
+            android:layout_marginBottom="30dp"
+            android:letterSpacing="0.2"
             android:layout_weight="0"
             android:ems="10"
             android:hint="Verification code"
-            android:inputType="number" />
+            android:inputType="number"
+            />
 
         <Button
             android:id="@+id/button_verify"
-            android:layout_width="300dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0"
-            android:text="verify" />
+            android:background="@color/buttonColor"
+            android:letterSpacing="0.3"
+            android:text="verify"
+            android:textColor="@color/textColor" />
 
     </LinearLayout>
 

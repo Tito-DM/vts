@@ -7,13 +7,19 @@
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".userprofile"
+    android:background="@drawable/gradient"
     tools:showIn="@layout/app_bar_userprofile">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/textColor"
+        android:textSize="20dp"
         android:layout_gravity="center"
-        android:text="Vehicle Information"/>
+        android:letterSpacing="0.2"
+        android:layout_marginBottom="10dp"
+        android:text="VEHICLE INFORMATION"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,10 +29,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:textSize="18dp"
+            android:letterSpacing="0.1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
             android:text="Name:"/>
         <TextView
             android:id="@+id/textViewgetName"
             android:layout_width="wrap_content"
+            android:textColor="@color/textColor"
+            android:textSize="18dp"
+            android:letterSpacing="0.1"
             android:layout_height="wrap_content"
             android:text="My Mane"/>
 
@@ -41,10 +55,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:textSize="18dp"
+            android:layout_marginLeft="10dp"
+            android:letterSpacing="0.1"
+            android:layout_marginRight="5dp"
             android:text="Phone Number:"/>
         <TextView
             android:id="@+id/textViewgetphone"
             android:layout_width="wrap_content"
+            android:textColor="@color/textColor"
+            android:textSize="18dp"
+            android:letterSpacing="0.1"
             android:layout_height="wrap_content"
             android:text="My Mane"/>
 
@@ -58,11 +80,19 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:textSize="18dp"
+            android:layout_marginLeft="10dp"
+            android:letterSpacing="0.1"
+            android:layout_marginRight="5dp"
             android:text="Model:"/>
         <TextView
             android:id="@+id/textViewgetmodel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:textSize="18dp"
+            android:letterSpacing="0.1"
             android:text="My Mane"/>
 
     </LinearLayout>
@@ -75,11 +105,19 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:textSize="18dp"
+            android:layout_marginLeft="10dp"
+            android:letterSpacing="0.1"
+            android:layout_marginRight="5dp"
             android:text="Colour:"/>
         <TextView
             android:id="@+id/textViewgetcolour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:textSize="18dp"
+            android:letterSpacing="0.1"
             android:text="My Mane"/>
 
     </LinearLayout>
@@ -93,9 +131,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:textSize="18dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:letterSpacing="0.1"
             android:text="Plate Number:"/>
         <TextView
             android:id="@+id/textViewgetplate"
+            android:textColor="@color/textColor"
+            android:textSize="18dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="My Mane"/>
@@ -110,18 +157,32 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:textSize="18dp"
+            android:layout_marginLeft="10dp"
+            android:letterSpacing="0.1"
+            android:layout_marginRight="5dp"
             android:text="Manufacture:"/>
         <TextView
             android:id="@+id/textViewgetmanufacture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:textSize="18dp"
+            android:letterSpacing="0.1"
+
             android:text="My Mane"/>
 
     </LinearLayout>
 
     <Button
         android:id="@+id/buttom_connect"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
+        android:layout_gravity="center"
+        android:textColor="@color/textColor"
+        android:letterSpacing=".1"
+        android:layout_marginTop="60dp"
+        android:background="@color/buttonColor"
         android:layout_height="wrap_content"
         android:text="connect to hardware"/>
 

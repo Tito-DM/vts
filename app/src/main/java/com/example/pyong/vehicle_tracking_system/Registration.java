@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,7 +41,7 @@ public class Registration extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
 
         setContentView(R.layout.activity_registration);
@@ -51,20 +52,28 @@ public class Registration extends AppCompatActivity {
         myDataBaseRef = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
 
+
         verifyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if(btntype == 0){
                     phoneEditText.setEnabled(false);
                     verifyButton.setEnabled(false);
                     String phoneNumber = phoneEditText.getText().toString();
-                    PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                            phoneNumber,        // Phone number to verify
-                            60,                 // Timeout duration
-                            TimeUnit.SECONDS,   // Unit of timeout
-                            Registration.this,               // Activity (for callback binding)
-                            mCallbacks);        // OnVerificationStateChangedCallbacks
-
+                    //check phone number
+                    if (phoneNumber.isEmpty()){
+                        Toast.makeText(Registration.this, "Phone Number field cannot be empty", Toast.LENGTH_SHORT).show();
+                        phoneEditText.setEnabled(true);
+                    }else{
+                        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                                phoneNumber,        // Phone number to verify
+                                60,                 // Timeout duration
+                                TimeUnit.SECONDS,   // Unit of timeout
+                                Registration.this,               // Activity (for callback binding)
+                                mCallbacks);        // OnVerificationStateChangedCallbacks
+                        
+                    }
 
                 }else{
                     verifyButton.setEnabled(false);

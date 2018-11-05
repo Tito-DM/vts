@@ -24,20 +24,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
-        <activity android:name=".MapsActivity">
+        <activity android:name=".Registration">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Vehicle_registration" />
+        <activity android:name=".userprofile" />
         <activity
             android:name=".SMS"
             android:label="@string/title_activity_userprofile"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Editvehicleinfo" />
-        <activity android:name=".userprofile" />
+        <activity android:name=".Vehicle_registration" />
 
         <receiver
             android:name=".SmsReceiver"
@@ -60,7 +60,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".Registration"
+            android:name=".MapsActivity"
             android:label="@string/title_activity_maps"></activity>
     </application>
 
