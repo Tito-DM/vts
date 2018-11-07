@@ -1,12 +1,15 @@
 package com.example.pyong.vehicle_tracking_system;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -30,6 +33,7 @@ import java.util.concurrent.TimeUnit;
 public class Registration extends AppCompatActivity {
     EditText phoneEditText, codeEditText;
     Button verifyButton;
+    TextView tryAgainTextView;
     DatabaseReference myDataBaseRef;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     public static FirebaseAuth mAuth;
@@ -37,11 +41,20 @@ public class Registration extends AppCompatActivity {
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private int btntype =0;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        //check if current user is logged
+        if (mAuth.getCurrentUser() != null){
+            Intent intent = new Intent(Registration.this, Vehicle_registration.class);
+            startActivity(intent);
+            finish();
+        }
+
 
 
         setContentView(R.layout.activity_registration);
@@ -49,8 +62,23 @@ public class Registration extends AppCompatActivity {
         phoneEditText = (EditText) findViewById(R.id.editText_phone);
         codeEditText = (EditText) findViewById(R.id.editText_code);
         verifyButton = (Button) findViewById(R.id.button_verify);
+        tryAgainTextView = (TextView) findViewById(R.id.textView_tryAgain);
         myDataBaseRef = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
+
+
+        tryAgainTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                codeEditText.setVisibility(View.INVISIBLE);
+                tryAgainTextView.setVisibility(View.INVISIBLE);
+                phoneEditText.setEnabled(true);
+                verifyButton.setEnabled(true);
+                verifyButton.setText("Verify");
+                btntype = 0;
+
+            }
+        });
 
 
         verifyButton.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +105,8 @@ public class Registration extends AppCompatActivity {
 
                 }else{
                     verifyButton.setEnabled(false);
+                    codeEditText.setVisibility(View.VISIBLE);
+                    tryAgainTextView.setVisibility(View.VISIBLE);
                     String verificationCode = codeEditText.getText().toString();
                     PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId,verificationCode);
                     signInWithPhoneAuthCredential(credential);
@@ -109,6 +139,8 @@ public class Registration extends AppCompatActivity {
                 mResendToken = token;
                 btntype = 1; //change the button functionality
                 verifyButton.setText("Verify code");
+                codeEditText.setVisibility(View.VISIBLE);
+                tryAgainTextView.setVisibility(View.VISIBLE);
                 verifyButton.setEnabled(true);
 
                 // ...

@@ -2,6 +2,7 @@ package com.example.pyong.vehicle_tracking_system;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,12 +13,14 @@ import android.widget.Toast;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +33,7 @@ public class Vehicle_registration extends AppCompatActivity {
     EditText editTextName, editTextPhone, editTextManufacturer,
             editTextPlateNumber, editTextColour, editTextModel;
     Button saveDataBtn;
-
+    ArrayList<String> userDataList = new ArrayList<>();
 
 
 
@@ -38,14 +41,8 @@ public class Vehicle_registration extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_registration);
-        String name = "";
-
-        mAuth = FirebaseAuth.getInstance();
-        if (mAuth.getCurrentUser() != null){
-            Intent intent = new Intent(Vehicle_registration.this, userprofile.class);
-            startActivity(intent);
-            finish();
-        }
+        getUserInfo();
+        Firebase.setAndroidContext(this);
 
 
 
@@ -58,6 +55,9 @@ public class Vehicle_registration extends AppCompatActivity {
         editTextModel = (EditText) findViewById(R.id.editText_model);
         saveDataBtn = (Button) findViewById(R.id.button_save);
         Firebase.setAndroidContext(this);
+
+
+
 
         saveDataBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,8 +98,8 @@ public class Vehicle_registration extends AppCompatActivity {
                         newPost.put("plate_number", plate_number);
                         newPost.put("colour", colour);
                         newPost.put("model", model);
-                        newPost.put("latitude", latitude);
-                        newPost.put("longitude", longitude);
+                        newPost.put("latitude", "");
+                        newPost.put("longitude", "");
 
 
                         //save to the database
@@ -119,4 +119,59 @@ public class Vehicle_registration extends AppCompatActivity {
 
 
     }
+
+
+    private void getUserInfo() {
+        mAuth = FirebaseAuth.getInstance();
+        if (mAuth.getCurrentUser() != null) {
+            String userId = mAuth.getCurrentUser().getUid();
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
+            ref.addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    String userData = dataSnapshot.getValue(String.class);
+                    userDataList.add(userData);
+                    if (userDataList.size() >= 8)
+                    {
+
+                        if (!(userDataList.get(0).isEmpty()) && mAuth.getCurrentUser() != null){
+
+                                Intent intent = new Intent(Vehicle_registration.this, userprofile.class);
+                                startActivity(intent);
+                                finish();
+
+                        }
+                    }
+
+
+                }
+
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                }
+
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+        }
+    }
+
+
+
+
+
 }

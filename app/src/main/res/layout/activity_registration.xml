@@ -21,7 +21,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="322dp"
+        android:layout_height="365dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
@@ -31,12 +31,12 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
-            android:letterSpacing="0.2"
             android:layout_marginBottom="50dp"
-            android:text="\n 1-Enter Your Phone Number\n 2- A Verification Code Wil\n 3- click on verify "
+            android:letterSpacing="0.1"
+            android:text="\n 1-Enter a valid phone number (starting with country code).\n 2- A Verification Code will be sent to your phone.\n 3- click on verify. "
             android:textColor="@color/textColor" />
 
 
@@ -46,13 +46,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
-            android:letterSpacing="0.2"
-            android:textColorHint="@color/hintTextColor"
             android:layout_weight="0"
             android:ems="10"
             android:hint="Enter Phone Number"
             android:inputType="phone"
-             />
+            android:letterSpacing="0.2"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/hintTextColor" />
 
         <EditText
             android:id="@+id/editText_code"
@@ -60,14 +60,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginRight="42dp"
-            android:textColorHint="@color/hintTextColor"
-            android:layout_marginBottom="30dp"
-            android:letterSpacing="0.2"
+            android:layout_marginBottom="20dp"
             android:layout_weight="0"
             android:ems="10"
             android:hint="Verification code"
             android:inputType="number"
-            />
+            android:letterSpacing="0.2"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/hintTextColor"
+            android:visibility="invisible" />
 
         <Button
             android:id="@+id/button_verify"
@@ -79,6 +80,16 @@
             android:letterSpacing="0.3"
             android:text="verify"
             android:textColor="@color/textColor" />
+
+        <TextView
+            android:id="@+id/textView_tryAgain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:text="Try Again"
+            android:textColor="@color/textColor"
+            android:visibility="invisible" />
 
     </LinearLayout>
 

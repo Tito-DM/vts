@@ -6,7 +6,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_edit"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_action_edit"
             android:title="Edit Vehicle info" />
 
     </group>
@@ -15,7 +15,7 @@
         <menu>
             <item
                 android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_action_info"
                 android:title="App info" />
 
         </menu>

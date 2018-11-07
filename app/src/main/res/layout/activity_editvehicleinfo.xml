@@ -28,6 +28,7 @@
         <EditText
             android:id="@+id/editText_nameEdit"
             android:textColorHint="@color/hintTextColor"
+            android:textColor="@color/textColor"
             android:layout_width="350dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
@@ -37,6 +38,7 @@
 
         <EditText
             android:id="@+id/editText_hdwPhoneEdit"
+            android:textColor="@color/textColor"
             android:layout_width="350dp"
             android:layout_gravity="center"
             android:textColorHint="@color/hintTextColor"
@@ -47,6 +49,7 @@
 
         <EditText
             android:id="@+id/editText_vehicle_manufacturerEdit"
+            android:textColor="@color/textColor"
             android:layout_width="350dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
@@ -57,6 +60,7 @@
 
         <EditText
             android:id="@+id/editText_plate_numberEdit"
+            android:textColor="@color/textColor"
             android:layout_width="350dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
@@ -67,6 +71,7 @@
 
         <EditText
             android:id="@+id/editText_colorEdit"
+            android:textColor="@color/textColor"
             android:layout_width="350dp"
             android:layout_gravity="center"
             android:textColorHint="@color/hintTextColor"
@@ -77,6 +82,7 @@
 
         <EditText
             android:id="@+id/editText_modelEdit"
+            android:textColor="@color/textColor"
             android:layout_width="350dp"
             android:layout_gravity="center"
             android:textColorHint="@color/hintTextColor"
@@ -85,14 +91,32 @@
             android:layout_marginBottom="20px"
             android:inputType="textPersonName" />
 
-        <Button
-            android:id="@+id/button_update"
-            android:layout_width="250dp"
-            android:background="@color/buttonColor"
-            android:letterSpacing="0.2"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Update" />
+            android:gravity="center">
+            <Button
+                android:id="@+id/button_back"
+                android:layout_width="wrap_content"
+                android:background="@color/buttonColor"
+                android:layout_marginRight="10dp"
+                android:letterSpacing="0.2"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="back" />
+
+            <Button
+                android:id="@+id/button_update"
+                android:layout_width="wrap_content"
+                android:background="@color/buttonColor"
+                android:letterSpacing="0.2"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Update" />
+
+        </LinearLayout>
+
+
 
 
     </LinearLayout>

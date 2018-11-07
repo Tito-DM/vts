@@ -26,7 +26,7 @@ import static com.example.pyong.vehicle_tracking_system.Registration.mAuth;
 public class Editvehicleinfo extends AppCompatActivity {
     EditText editTextNameEdit, editTextPhoneEdit, editTextManufacturerEdit,
             editTextPlateNumberEdit, editTextColourEdit, editTextModelEdit;
-    Button updateDataBtn;
+    Button updateDataBtn, backBtn;
     ArrayList<String> userDataList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,17 @@ public class Editvehicleinfo extends AppCompatActivity {
         getuserData();
 
         Firebase.setAndroidContext(this);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Editvehicleinfo.this,userprofile.class);
+                startActivity(i);
+                finish();
+
+            }
+        });
+
         updateDataBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,15 +94,15 @@ public class Editvehicleinfo extends AppCompatActivity {
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                     String userData = dataSnapshot.getValue(String.class);
                     userDataList.add(userData);
-                    if (userDataList.size() >= 6)
+                    if (userDataList.size() >= 8)
                     {
                         getuserData();
                         editTextColourEdit.setText(String.valueOf(userDataList.get(0)));
                         editTextPhoneEdit.setText(String.valueOf(userDataList.get(1)));
-                        editTextModelEdit.setText(String.valueOf(userDataList.get(2)));
-                        editTextNameEdit.setText(String.valueOf(userDataList.get(3)));
-                        editTextPlateNumberEdit.setText(String.valueOf(userDataList.get(4)));
-                        editTextManufacturerEdit.setText(String.valueOf(userDataList.get(5)));
+                        editTextModelEdit.setText(String.valueOf(userDataList.get(4)));
+                        editTextNameEdit.setText(String.valueOf(userDataList.get(5)));
+                        editTextPlateNumberEdit.setText(String.valueOf(userDataList.get(6)));
+                        editTextManufacturerEdit.setText(String.valueOf(userDataList.get(7)));
                     }
 
 
@@ -129,6 +140,7 @@ public class Editvehicleinfo extends AppCompatActivity {
         editTextColourEdit = (EditText) findViewById(R.id.editText_colorEdit);
         editTextModelEdit = (EditText) findViewById(R.id.editText_modelEdit);
         updateDataBtn = (Button) findViewById(R.id.button_update);
+        backBtn = (Button) findViewById(R.id.button_back);
 
     }
 }

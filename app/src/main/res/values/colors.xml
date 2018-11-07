@@ -6,4 +6,6 @@
     <color name="textColor">#ffffff</color>
     <color name="buttonColor">#4CAF50</color>
     <color name="hintTextColor">#BDBDBD</color>
+    <color name="altTextColor">#212121</color>
+    <color name="cardcolor">#F5F5F5</color>
 </resources>

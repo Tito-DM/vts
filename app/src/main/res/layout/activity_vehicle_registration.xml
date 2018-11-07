@@ -29,6 +29,7 @@
             android:id="@+id/editText_name"
             android:layout_width="310dp"
             android:textColorHint="@color/hintTextColor"
+            android:textColor="@color/textColor"
             android:layout_gravity="center"
             android:letterSpacing="0.2"
             android:layout_height="wrap_content"
@@ -40,6 +41,7 @@
             android:id="@+id/editText_hdwPhone"
             android:layout_width="310dp"
             android:layout_gravity="center"
+            android:textColor="@color/textColor"
             android:layout_height="wrap_content"
             android:letterSpacing="0.2"
             android:textColorHint="@color/hintTextColor"
@@ -49,6 +51,7 @@
 
         <EditText
             android:id="@+id/editText_vehicle_manufacturer"
+            android:textColor="@color/textColor"
             android:layout_width="310dp"
             android:letterSpacing="0.2"
             android:layout_gravity="center"
@@ -60,6 +63,7 @@
 
         <EditText
             android:id="@+id/editText_plate_number"
+            android:textColor="@color/textColor"
             android:layout_width="310dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
@@ -71,6 +75,7 @@
 
         <EditText
             android:id="@+id/editText_color"
+            android:textColor="@color/textColor"
             android:layout_width="310dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
@@ -82,6 +87,7 @@
 
         <EditText
             android:id="@+id/editText_model"
+            android:textColor="@color/textColor"
             android:layout_width="310dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"

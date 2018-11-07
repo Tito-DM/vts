@@ -38,8 +38,9 @@ import static com.example.pyong.vehicle_tracking_system.Registration.mAuth;
 public class userprofile extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     TextView textviewName, textviewtPhone, textviewManufacturer,
-            textviewPlateNumber, textviewColour, textviewModel;
+            textviewPlateNumber, textviewColour, textviewModel, textViewNameMenu;
     Button connect_btn;
+    int btnState = 0;
     ArrayList<String> userDataList = new ArrayList<>();
     private final static int REQUEST_CODE_PERMISSION_SEND_SMS =123;
 
@@ -52,14 +53,7 @@ public class userprofile extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -147,14 +141,16 @@ public class userprofile extends AppCompatActivity
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                     String userData = dataSnapshot.getValue(String.class);
                     userDataList.add(userData);
-                    if (userDataList.size() >= 6) {
+                    if (userDataList.size() >= 8) {
                         getuserData();
                         textviewColour.setText(String.valueOf(userDataList.get(0)));
                         textviewtPhone.setText(String.valueOf(userDataList.get(1)));
-                        textviewModel.setText(String.valueOf(userDataList.get(2)));
-                        textviewName.setText(String.valueOf(userDataList.get(3)));
-                        textviewPlateNumber.setText(String.valueOf(userDataList.get(4)));
-                        textviewManufacturer.setText(String.valueOf(userDataList.get(5)));
+                        textviewModel.setText(String.valueOf(userDataList.get(4)));
+                        textviewName.setText(String.valueOf(userDataList.get(5)));
+                        textviewPlateNumber.setText(String.valueOf(userDataList.get(6)));
+                        textviewManufacturer.setText(String.valueOf(userDataList.get(7)));
+
+
                     }
 
 
@@ -193,6 +189,7 @@ public class userprofile extends AppCompatActivity
         textviewtPhone = (TextView) findViewById(R.id.textViewgetphone);
         textviewPlateNumber = (TextView) findViewById(R.id.textViewgetplate);
         connect_btn = (Button) findViewById(R.id.buttom_connect);
+        textViewNameMenu = (TextView) findViewById(R.id.textView_menu);
 
     }
 
