@@ -125,6 +125,8 @@ public class Registration extends AppCompatActivity {
             @Override
             public void onVerificationFailed(FirebaseException e) {
                 Toast.makeText(Registration.this, "There were some errors verifying the code", Toast.LENGTH_SHORT).show();
+                phoneEditText.setEnabled(true);
+                verifyButton.setEnabled(true);
 
             }
             @Override

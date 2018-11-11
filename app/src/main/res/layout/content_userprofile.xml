@@ -191,7 +191,7 @@
         android:layout_marginTop="60dp"
         android:background="@color/buttonColor"
         android:layout_height="wrap_content"
-        android:text="connect to hardware"/>
+        android:text="get location"/>
 
 
 

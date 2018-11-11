@@ -41,80 +41,86 @@ public class Vehicle_registration extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_registration);
-        getUserInfo();
-        Firebase.setAndroidContext(this);
 
 
+        try {
+            Firebase.setAndroidContext(this);
+            //get user Data
+            getUserInfo();
+            editTextName = (EditText) findViewById(R.id.editText_name);
+            editTextPhone = (EditText) findViewById(R.id.editText_hdwPhone);
+            editTextManufacturer = (EditText) findViewById(R.id.editText_vehicle_manufacturer);
+            editTextPlateNumber = (EditText) findViewById(R.id.editText_plate_number);
+            editTextColour = (EditText) findViewById(R.id.editText_color);
+            editTextModel = (EditText) findViewById(R.id.editText_model);
+            saveDataBtn = (Button) findViewById(R.id.button_save);
 
-        //get user Data
-        editTextName = (EditText) findViewById(R.id.editText_name);
-        editTextPhone = (EditText) findViewById(R.id.editText_hdwPhone);
-        editTextManufacturer = (EditText) findViewById(R.id.editText_vehicle_manufacturer);
-        editTextPlateNumber = (EditText) findViewById(R.id.editText_plate_number);
-        editTextColour = (EditText) findViewById(R.id.editText_color);
-        editTextModel = (EditText) findViewById(R.id.editText_model);
-        saveDataBtn = (Button) findViewById(R.id.button_save);
-        Firebase.setAndroidContext(this);
+            saveDataBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
+                    //check if user is logged in
+                    mAuth = FirebaseAuth.getInstance();
+                    if (mAuth.getCurrentUser() != null){
+                        String userId = mAuth.getCurrentUser().getUid();
+                        DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
+                        Map  newPost = new HashMap();
+                        String name = editTextName.getText().toString();
+                        String phone = editTextPhone.getText().toString();
+                        String manufacture = editTextManufacturer.getText().toString();
+                        String plate_number = editTextPlateNumber.getText().toString();
+                        String colour = editTextColour.getText().toString();
+                        String model = editTextModel.getText().toString();
 
+                        //check each field
+                        if (name.isEmpty()){
+                            Toast.makeText(Vehicle_registration.this, "Name field cannot be empty", Toast.LENGTH_SHORT).show();
 
-
-        saveDataBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //check if user is logged in
-                mAuth = FirebaseAuth.getInstance();
-                if (mAuth.getCurrentUser() != null){
-                    String userId = mAuth.getCurrentUser().getUid();
-                    DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
-                    Map  newPost = new HashMap();
-                    String name = editTextName.getText().toString();
-                    String phone = editTextPhone.getText().toString();
-                    String manufacture = editTextManufacturer.getText().toString();
-                    String plate_number = editTextPlateNumber.getText().toString();
-                    String colour = editTextColour.getText().toString();
-                    String model = editTextModel.getText().toString();
-
-                    //check each field
-                    if (name.isEmpty()){
-                        Toast.makeText(Vehicle_registration.this, "Name field cannot be empty", Toast.LENGTH_SHORT).show();
-
-                    }else if (phone.isEmpty()){
-                        Toast.makeText(Vehicle_registration.this, "Phone number field cannot be empty", Toast.LENGTH_SHORT).show();
-                    }else if (manufacture.isEmpty()){
-                        Toast.makeText(Vehicle_registration.this, "manufacture field cannot be empty", Toast.LENGTH_SHORT).show();
-                    }else if (plate_number.isEmpty()){
-                        Toast.makeText(Vehicle_registration.this, "plate mumber field cannot be empty", Toast.LENGTH_SHORT).show();
-                    }else if (colour.isEmpty()){
-                        Toast.makeText(Vehicle_registration.this, "color field cannot be empty", Toast.LENGTH_SHORT).show();
-                    }else if (model.isEmpty()){
-                        Toast.makeText(Vehicle_registration.this, "model field cannot be empty", Toast.LENGTH_SHORT).show();
-                    }else{
-                        //save info to a hash
-                        newPost.put("name", name);
-                        newPost.put("hdw_phone", phone);
-                        newPost.put("vehicle_manufacture", manufacture);
-                        newPost.put("plate_number", plate_number);
-                        newPost.put("colour", colour);
-                        newPost.put("model", model);
-                        newPost.put("latitude", "");
-                        newPost.put("longitude", "");
+                        }else if (phone.isEmpty()){
+                            Toast.makeText(Vehicle_registration.this, "Phone number field cannot be empty", Toast.LENGTH_SHORT).show();
+                        }else if (manufacture.isEmpty()){
+                            Toast.makeText(Vehicle_registration.this, "manufacture field cannot be empty", Toast.LENGTH_SHORT).show();
+                        }else if (plate_number.isEmpty()){
+                            Toast.makeText(Vehicle_registration.this, "plate mumber field cannot be empty", Toast.LENGTH_SHORT).show();
+                        }else if (colour.isEmpty()){
+                            Toast.makeText(Vehicle_registration.this, "color field cannot be empty", Toast.LENGTH_SHORT).show();
+                        }else if (model.isEmpty()){
+                            Toast.makeText(Vehicle_registration.this, "model field cannot be empty", Toast.LENGTH_SHORT).show();
+                        }else{
+                            //save info to a hash
+                            newPost.put("name", name);
+                            newPost.put("hdw_phone", phone);
+                            newPost.put("vehicle_manufacture", manufacture);
+                            newPost.put("plate_number", plate_number);
+                            newPost.put("colour", colour);
+                            newPost.put("model", model);
+                            newPost.put("latitude", "");
+                            newPost.put("longitude", "");
 
 
-                        //save to the database
-                        current_user_db.setValue(newPost);
-                        Toast.makeText(Vehicle_registration.this, "Data Saved", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(Vehicle_registration.this, userprofile.class);
-                        startActivity(intent);
-                        finish();
+                            //save to the database
+                            current_user_db.setValue(newPost);
+                            Toast.makeText(Vehicle_registration.this, "Data Saved", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(Vehicle_registration.this, userprofile.class);
+                            startActivity(intent);
+                            finish();
+
+                        }
 
                     }
 
                 }
+            });
 
-            }
-        });
+
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+
+
+
 
 
 

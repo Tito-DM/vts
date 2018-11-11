@@ -194,8 +194,8 @@ public class userprofile extends AppCompatActivity
     }
 
     protected void sendSMSMessage() {
-        String phone = "+27659943377";
-        String message = "Hello world";
+        String phone = "+27742842345";
+        String message = "on";
 
         try {
             SmsManager smgr = SmsManager.getDefault();

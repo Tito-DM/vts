@@ -38,12 +38,21 @@ public class SmsReceiver extends BroadcastReceiver {
 
                 String phone = smsMessage.getOriginatingAddress();
                 hdwMessage = smsMessage.getMessageBody().toString();
+                try {
+                    Toast.makeText(context, phone + ": " + hdwMessage, Toast.LENGTH_SHORT).show();
+                    //check the phone number
 
-                Toast.makeText(context, phone + ": " + hdwMessage, Toast.LENGTH_SHORT).show();
-                String []coordinates = hdwMessage.split(",");
+                    if (phone == "myphone"){
+                        String []coordinates = hdwMessage.split(",");
+                        latitude = coordinates[0];
+                        longitude = coordinates[1];
+                    }
 
-                latitude = coordinates[0];
-                longitude = coordinates[1];
+                }
+                catch (Exception e){
+                    Toast.makeText(context, "SMS Failed to Send, Please try again", Toast.LENGTH_SHORT).show();
+                }
+
 
                 mAuth = FirebaseAuth.getInstance();
                 if (mAuth.getCurrentUser() != null) {
