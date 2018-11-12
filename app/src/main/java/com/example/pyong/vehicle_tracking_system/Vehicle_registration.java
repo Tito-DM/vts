@@ -1,6 +1,8 @@
 package com.example.pyong.vehicle_tracking_system;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -37,16 +39,44 @@ public class Vehicle_registration extends AppCompatActivity {
 
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_registration);
+
+        SharedPreferences pref = getSharedPreferences("", Context.MODE_PRIVATE);
+        if(pref.getBoolean("activity_executed", false)){
+            Intent intent = new Intent(this, userprofile.class);
+            startActivity(intent);
+            finish();
+        } else {
+            SharedPreferences.Editor ed = pref.edit();
+            ed.putBoolean("activity_executed", true);
+            ed.commit();
+        }
 
 
         try {
             Firebase.setAndroidContext(this);
             //get user Data
             getUserInfo();
+
+            if (userDataList.size() >= 8)
+            {
+
+                if (!(userDataList.get(0).isEmpty()) && mAuth.getCurrentUser() != null){
+
+                    Intent intent = new Intent(Vehicle_registration.this, userprofile.class);
+                    startActivity(intent);
+                    finish();
+
+                }
+            }
+
+
+
             editTextName = (EditText) findViewById(R.id.editText_name);
             editTextPhone = (EditText) findViewById(R.id.editText_hdwPhone);
             editTextManufacturer = (EditText) findViewById(R.id.editText_vehicle_manufacturer);
@@ -137,18 +167,6 @@ public class Vehicle_registration extends AppCompatActivity {
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                     String userData = dataSnapshot.getValue(String.class);
                     userDataList.add(userData);
-                    if (userDataList.size() >= 8)
-                    {
-
-                        if (!(userDataList.get(0).isEmpty()) && mAuth.getCurrentUser() != null){
-
-                                Intent intent = new Intent(Vehicle_registration.this, userprofile.class);
-                                startActivity(intent);
-                                finish();
-
-                        }
-                    }
-
 
                 }
 
