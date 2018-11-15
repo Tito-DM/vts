@@ -12,6 +12,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import static com.example.pyong.vehicle_tracking_system.Registration.mAuth;
+import static com.example.pyong.vehicle_tracking_system.userprofile.btnState;
+import static com.example.pyong.vehicle_tracking_system.userprofile.connect_btn;
 
 public class SmsReceiver extends BroadcastReceiver {
     private String TAG = SmsReceiver.class.getSimpleName();
@@ -41,12 +43,10 @@ public class SmsReceiver extends BroadcastReceiver {
                 try {
                     Toast.makeText(context, phone + ": " + hdwMessage, Toast.LENGTH_SHORT).show();
                     //check the phone number
-
-                    if (phone == "myphone"){
                         String []coordinates = hdwMessage.split(",");
                         latitude = coordinates[0];
                         longitude = coordinates[1];
-                    }
+
 
                 }
                 catch (Exception e){
@@ -54,21 +54,29 @@ public class SmsReceiver extends BroadcastReceiver {
                 }
 
 
-                mAuth = FirebaseAuth.getInstance();
-                if (mAuth.getCurrentUser() != null) {
-                    String userId = mAuth.getCurrentUser().getUid();
-                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                if (hdwMessage != "Waiting for GPS Signal"){
+                    mAuth = FirebaseAuth.getInstance();
+                    if (mAuth.getCurrentUser() != null) {
+                        String userId = mAuth.getCurrentUser().getUid();
+                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
 
-                    try {
-                        ref.child("Users").child(userId).child("latitude").setValue(latitude);
-                        ref.child("Users").child(userId).child("longitude").setValue(longitude);
+                        try {
+                            ref.child("Users").child(userId).child("latitude").setValue(latitude);
+                            ref.child("Users").child(userId).child("longitude").setValue(longitude);
+                            Toast.makeText(context, "Data saved", Toast.LENGTH_SHORT).show();
+                            btnState = 1;
+                            connect_btn.setText("View location on map");
 
-                    } catch (Exception e) {
+                        } catch (Exception e) {
 
-                        e.printStackTrace();
+                            e.printStackTrace();
+                        }
+
+
                     }
-                    Toast.makeText(context, "Data saved", Toast.LENGTH_SHORT).show();
+
+
 
                 }
             }

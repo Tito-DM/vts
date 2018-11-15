@@ -1,5 +1,7 @@
 package com.example.pyong.vehicle_tracking_system;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -18,7 +20,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 import static com.example.pyong.vehicle_tracking_system.Registration.mAuth;
 
@@ -26,8 +31,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     ArrayList<String> userDataList = new ArrayList<>();
-    String lat,lon;
-    double newlat, newlong;
+    List<Address> addresses;
+    String lat = "",lon = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,21 +55,43 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * installed Google Play services and returned to the app.
      */
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(final GoogleMap googleMap) {
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null) {
             String userId = mAuth.getCurrentUser().getUid();
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
 
-            ref.addChildEventListener(new ChildEventListener() {
+            ChildEventListener vehicle_location = ref.addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                     String userData = dataSnapshot.getValue(String.class);
                     userDataList.add(userData);
-                    if (userDataList.size() >= 8)
-                    {
-                        lat = userDataList.get(6);
-                        lon = userDataList.get(7);
+                    if (userDataList.size() >= 8) {
+
+
+                        lat =    String.valueOf(userDataList.get(2));
+                        lon =   String.valueOf(userDataList.get(3));
+
+                        mMap = googleMap;
+                        Geocoder geocoder;
+                        geocoder = new Geocoder(MapsActivity.this, Locale.getDefault());
+
+                        try {
+                            addresses = geocoder.getFromLocation(Double.parseDouble(lat), Double.parseDouble(lon), 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+                        String city = addresses.get(0).getLocality();
+                        String state = addresses.get(0).getAdminArea();
+                        String country = addresses.get(0).getCountryName();
+                        String postalCode = addresses.get(0).getPostalCode();
+                        String knownName = addresses.get(0).getFeatureName();
+
+                        LatLng location = new LatLng(Double.parseDouble(lat), Double.parseDouble(lon));
+                        mMap.addMarker(new MarkerOptions().position(location).title(address));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f));
 
                     }
 
@@ -92,25 +119,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             });
         }
-        mMap = googleMap;
-
-        if (lat.isEmpty() && lon.isEmpty()){
-            // Add a marker in Sydney and move the camera
-            LatLng location = new LatLng(-25.748405, 28.21000);
-            mMap.addMarker(new MarkerOptions().position(location).title("Vehicle location"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,10f));
-
-        }else{
-            newlat = Double.parseDouble(lat);
-            newlong = Double.parseDouble(lon);
-            // Add a marker in Sydney and move the camera
-            LatLng location = new LatLng(newlat, newlong);
-            mMap.addMarker(new MarkerOptions().position(location).title("Vehicle location"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,10f));
-
-        }
-
-
 
     }
 

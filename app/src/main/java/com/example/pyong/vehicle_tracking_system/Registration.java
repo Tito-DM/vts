@@ -1,5 +1,6 @@
 package com.example.pyong.vehicle_tracking_system;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -25,6 +27,7 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import java.util.concurrent.TimeUnit;
 
@@ -35,6 +38,7 @@ public class Registration extends AppCompatActivity {
     Button verifyButton;
     TextView tryAgainTextView;
     DatabaseReference myDataBaseRef;
+    ProgressBar progressBar;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     public static FirebaseAuth mAuth;
     private String mVerificationId;
@@ -46,8 +50,6 @@ public class Registration extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
-
-
         //check if current user is logged
         if (mAuth.getCurrentUser() != null){
             Intent intent = new Intent(Registration.this, Vehicle_registration.class);
@@ -64,6 +66,7 @@ public class Registration extends AppCompatActivity {
         verifyButton = (Button) findViewById(R.id.button_verify);
         tryAgainTextView = (TextView) findViewById(R.id.textView_tryAgain);
         myDataBaseRef = FirebaseDatabase.getInstance().getReference();
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
         mAuth = FirebaseAuth.getInstance();
 
 
@@ -88,25 +91,32 @@ public class Registration extends AppCompatActivity {
                 if(btntype == 0){
                     phoneEditText.setEnabled(false);
                     verifyButton.setEnabled(false);
+
                     String phoneNumber = phoneEditText.getText().toString();
+
+                    
+
                     //check phone number
                     if (phoneNumber.isEmpty()){
                         Toast.makeText(Registration.this, "Phone Number field cannot be empty", Toast.LENGTH_SHORT).show();
                         phoneEditText.setEnabled(true);
+                        verifyButton.setEnabled(true);
                     }else{
+                        progressBar.setVisibility(View.VISIBLE);
                         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                                 phoneNumber,        // Phone number to verify
                                 60,                 // Timeout duration
                                 TimeUnit.SECONDS,   // Unit of timeout
                                 Registration.this,               // Activity (for callback binding)
                                 mCallbacks);        // OnVerificationStateChangedCallbacks
-                        
+
                     }
 
                 }else{
                     verifyButton.setEnabled(false);
                     codeEditText.setVisibility(View.VISIBLE);
                     tryAgainTextView.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.VISIBLE);
                     String verificationCode = codeEditText.getText().toString();
                     PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId,verificationCode);
                     signInWithPhoneAuthCredential(credential);
@@ -124,8 +134,9 @@ public class Registration extends AppCompatActivity {
 
             @Override
             public void onVerificationFailed(FirebaseException e) {
-                Toast.makeText(Registration.this, "There were some errors verifying the code", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Registration.this, "There were some errors please verify your phone number or internet connection", Toast.LENGTH_LONG).show();
                 phoneEditText.setEnabled(true);
+                progressBar.setVisibility(View.INVISIBLE);
                 verifyButton.setEnabled(true);
 
             }
@@ -144,6 +155,7 @@ public class Registration extends AppCompatActivity {
                 codeEditText.setVisibility(View.VISIBLE);
                 tryAgainTextView.setVisibility(View.VISIBLE);
                 verifyButton.setEnabled(true);
+                progressBar.setVisibility(View.INVISIBLE);
 
                 // ...
             }
@@ -157,6 +169,7 @@ public class Registration extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
+                            progressBar.setVisibility(View.INVISIBLE);
                             Intent intent = new Intent(Registration.this,Vehicle_registration.class);
                             startActivity(intent);
                             finish();

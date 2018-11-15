@@ -39,8 +39,8 @@ public class userprofile extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     TextView textviewName, textviewtPhone, textviewManufacturer,
             textviewPlateNumber, textviewColour, textviewModel, textViewNameMenu;
-    Button connect_btn;
-    int btnState = 0;
+    public static Button connect_btn;
+    public static int btnState = 0;
     ArrayList<String> userDataList = new ArrayList<>();
     private final static int REQUEST_CODE_PERMISSION_SEND_SMS =123;
 
@@ -69,12 +69,26 @@ public class userprofile extends AppCompatActivity
 
         //sendsms
 
+
+
         connect_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendSMSMessage();
+                if (btnState == 0 ){
+                    sendSMSMessage();
+                }else{
+                    btnState = 0;
+                    Intent i = new Intent(userprofile.this,MapsActivity.class);
+                    startActivity(i);
+                    connect_btn.setText("Get Location");
+                    finish();
+
+
+                }
+
             }
         });
+
 
     }
 
@@ -200,10 +214,10 @@ public class userprofile extends AppCompatActivity
         try {
             SmsManager smgr = SmsManager.getDefault();
             smgr.sendTextMessage(phone, null, message, null, null);
-            Toast.makeText(userprofile.this, "SMS Sent Successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(userprofile.this, "Request Sent", Toast.LENGTH_SHORT).show();
         }
         catch (Exception e){
-            Toast.makeText(userprofile.this, "SMS Failed to Send, Please try again", Toast.LENGTH_SHORT).show();
+            Toast.makeText(userprofile.this, "Request Failed to Send, Please try again or check your app permission or SMS data", Toast.LENGTH_SHORT).show();
         }
     }
 
